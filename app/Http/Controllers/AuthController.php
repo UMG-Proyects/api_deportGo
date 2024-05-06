@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -35,5 +36,26 @@ class AuthController extends Controller
             'acces_token' => $token,
             'token_type' => 'Bearer',
         ], Response::HTTP_OK);
+    }
+
+
+    public function login(Request $request)
+    {
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $user = User::where('email', $request['email'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Hi '.$user->name,
+            'accesToken' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user,
+        ]);
     }
 }
