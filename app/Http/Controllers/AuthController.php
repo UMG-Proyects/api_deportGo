@@ -58,4 +58,13 @@ class AuthController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'Se ha Deslogueado correctamente!'
+        ];
+    }
 }
