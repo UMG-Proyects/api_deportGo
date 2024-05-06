@@ -1,4 +1,4 @@
-# Setup del BackEnd
+# Setup del Backend
 
 ## Ejecutar los siguientes comandos
 
@@ -7,9 +7,9 @@ git clone git@github.com:UMG-Proyects/api_deportGo.git
 composer install
 ```
 
-## .env del BackEnd
+## .env del Backend
 
-Dentro del directorio donde clonamos el BackEnd, debemos de crear un archivo llamado `.env` y colocar el siguiente contenido:
+Dentro del directorio donde clonamos el Backend, debemos de crear un archivo llamado `.env` y colocar el siguiente contenido:
 
 
 ```bash
@@ -72,3 +72,7 @@ MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 # estar dentro del proyecto
 php artisan serve
 ```
+
+## Integrantes
+
+- Jaime Alexander Rax Caal - 0902 20 15240
