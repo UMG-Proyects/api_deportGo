@@ -76,3 +76,4 @@ php artisan serve
 ## Integrantes
 
 - Jaime Alexander Rax Caal - 0902 20 15240
+- Gilberto Arturo Sierra Rax - 0902 16 7372
