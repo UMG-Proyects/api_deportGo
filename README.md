@@ -4,6 +4,7 @@
 
 ```bash
 git clone git@github.com:UMG-Proyects/api_deportGo.git
+cd api_deportGo
 composer install
 ```
 
@@ -65,6 +66,16 @@ PUSHER_APP_CLUSTER=mt1
 
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+```
+## BASE DE DATOS
+
+```
+create database deportGo
+```
+
+## Migraciones 
+```bash
+php artisan migrate
 ```
 ## Levantar proyecto local
 
