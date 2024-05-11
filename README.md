@@ -4,6 +4,7 @@
 
 ```bash
 git clone git@github.com:UMG-Proyects/api_deportGo.git
+cd api_deportGo
 composer install
 ```
 
@@ -66,6 +67,16 @@ PUSHER_APP_CLUSTER=mt1
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ```
+## BASE DE DATOS
+
+```
+create database deportGo
+```
+
+## Migraciones 
+```bash
+php artisan migrate
+```
 ## Levantar proyecto local
 
 ```bash
@@ -77,5 +88,5 @@ php artisan serve
 
 - Jaime Alexander Rax Caal - 0902 20 15240
 - Gilberto Arturo Sierra Rax - 0902 16 7372
-
-- Emely Magaly Tecu Tecu - 0902 20 15520
+- Gladis Madaí Cuc Tun - 0902 20 21166
+- Emely Magaly Tecú Tecú - 0902 20 15520
