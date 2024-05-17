@@ -14,9 +14,9 @@ class sponsorsController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'primer_nombre' => 'required|string|max:255',
-                'segundo_nombre' => 'required|string|max:255',
+                'segundo_nombre' => 'string|max:255',
                 'primer_apellido' => 'required|string|max:255',
-                'segundo_apellido' => 'required|string|max:255',
+                'segundo_apellido' => 'string|max:255',
                 'telefono' => 'required|numeric|min:8'
             ]);
 
@@ -74,7 +74,7 @@ class sponsorsController extends Controller
             if (!$patrocinadores) {
                 return response()->json(['message' => 'Patrociandor no encontrado'], 404);
             }
-            return response()->json($patrocinadores, 200);
+            return response()->json($patrocinadores, Response::HTTP_OK);
         } catch(\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
@@ -88,7 +88,7 @@ class sponsorsController extends Controller
         try {
             $patrocinadores = Patrocinador::find($id);
             if (!$patrocinadores) {
-                return response()->json(['message' => 'Patrociandor no encontrado'], 404);
+                return response()->json(['message' => 'Patrociandor no encontrado'], Response::HTTP_NOT_FOUND);
             }
 
             $validator = Validator::make($request->all(), [

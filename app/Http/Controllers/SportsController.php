@@ -20,7 +20,6 @@ class SportsController extends Controller
                 return response()->json([
                     'message' => 'Validation failed',
                     'status' => false,
-                    'errors' => $validator->errors()
                 ], Response::HTTP_BAD_REQUEST);
             }
 
@@ -63,7 +62,7 @@ class SportsController extends Controller
             if (!$deportes) {
                 return response()->json(['message' => 'Deporte no encontrado'], 404);
             }
-            return response()->json($deportes, 200);
+            return response()->json($deportes, Response::HTTP_OK);
 
         } catch(\Throwable $th) {
             return response()->json([

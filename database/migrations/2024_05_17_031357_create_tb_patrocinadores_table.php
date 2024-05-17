@@ -17,9 +17,9 @@ class CreateTbPatrocinadoresTable extends Migration
             $table->id();
             $table-> boolean('estado')->default(true);
             $table->string('primer_nombre', 255)->nullable(false);
-            $table->string('segundo_nombre', 255)->nullable(false);
+            $table->string('segundo_nombre', 255)->nullable(true);
             $table->string('primer_apellido', 255)->nullable(false);
-            $table->string('segundo_apellido', 255)->nullable(false);
+            $table->string('segundo_apellido', 255)->nullable(true);
             $table->integer('telefono')->nullable(false);
             $table->timestamps();
         });
