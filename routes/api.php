@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArbitroController;
+use App\Http\Controllers\categoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +30,14 @@ Route::get('listarArbitro', [ArbitroController::class, 'listarArbitro']);//Lista
 Route::post('crearArbitro', [ArbitroController::class, 'crearArbitro']);//Crear
 Route::get('consultarArbitro/{id}', [ArbitroController::class, 'consultarArbitro']);//Consultar
 Route::put('editarArbitro/{id}', [ArbitroController::class, 'editarArbitro']); // Editar
+Route::put('desactivarArbitro/{id}', [ArbitroController::class, 'desactivarArbitro']);
 
 //rutas para categoria
-//Route::get('listarCategoria', [categoriaController::class, 'listarCategoria']);//Listar
-//Route::post('crearCategoria', [categoriaController::class, 'crearCategoria']);//Crear
-//Route::get('consultarArbitro/{id}', [categoriaController::class, 'consultarCategoria']);//Consultar
-//Route::put('editarArbitro/{id}', [categoriaController::class, 'editarCategoria']); // Editar
+Route::get('listCat', [categoriaController::class, 'listCat']);//Listar
+Route::post('crearCat', [categoriaController::class, 'crearCat']);//Crear
+Route::get('consultarCat/{id}', [categoriaController::class, 'consultarCat']);//Consultar
+Route::put('editarCat/{id}', [categoriaController::class, 'editarCat']); // Editar
+
 
 
 

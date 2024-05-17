@@ -20,5 +20,10 @@ class Arbitro extends Model
         'genero'
     ];
     
+    public function desactivar()
+    {
+        $this->estado = 0;
+        $this->save();
+    }
 }
 

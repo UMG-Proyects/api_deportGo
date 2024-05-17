@@ -10,16 +10,16 @@ use Illuminate\Http\Response;
 class CategoriaController extends Controller
 {
     //Listar categoria
-    public function listarCategoria()
+    public function listCat()
     {
         $categoria = Categoria::all();
         return response()->json($categoria);
     }
     //crear categoria
-   public function crearCategoria(Request $request){
+   public function crearCat(Request $request){
     
     try{
-        $categoria = Categoria::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'categoria' => 'required|string|max:255',
         ]);
     
@@ -45,7 +45,7 @@ class CategoriaController extends Controller
     ], Response::HTTP_OK);
    }
    //Consultar Categoria
-   public function consultarCategoria($id)
+   public function consultarCat($id)
 {
     $categoria = Categoria::find($id);
     if (!$categoria) {
@@ -54,7 +54,7 @@ class CategoriaController extends Controller
     return response()->json($categoria, 200);
 }
 //Editar categoria
-    public function editarCategoria(Request $request, $id)
+    public function editarCat(Request $request, $id)
     {
         $categoria = Categoria::find($id);
         if (!$categoria) {

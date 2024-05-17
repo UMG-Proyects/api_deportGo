@@ -13,7 +13,7 @@ class ArbitroController extends Controller
     public function listarArbitro()
     {
         try{
-            $arbitro = Arbitro::all();
+            $arbitro = Arbitro::where('estado', 1)->get();
         return response()->json($arbitro);
         }
         catch(\Throwable $th){
@@ -127,5 +127,29 @@ class ArbitroController extends Controller
             'arbitro' => $arbitro,
         ], Response::HTTP_OK);
         
+    }
+    
+    public function desactivarArbitro($id)
+    {
+        try {
+            $arbitro = Arbitro::find($id);
+            if (!$arbitro) {
+                return response()->json(['message' => 'Arbitro no encontrado'], 404);
+            }
+
+            $arbitro->desactivar();
+
+            return response()->json([
+                'message' => 'Arbitro eliminado',
+                'status' => true,
+                'patrocinador' => $arbitro,
+            ], Response::HTTP_OK);
+
+        } catch(\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+                'status' => false
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
