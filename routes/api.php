@@ -25,7 +25,15 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 //rutas para arbitro
-Route::post('crearArbitro', [ArbitroController::class, 'crearArbitro']);
+Route::get('listarArbitro', [ArbitroController::class, 'listarArbitro']);//Listar
+Route::post('crearArbitro', [ArbitroController::class, 'crearArbitro']);//Crear
+Route::get('consultarArbitro/{id}', [ArbitroController::class, 'consultarArbitro']);//Consultar
+Route::put('editarArbitro/{id}', [ArbitroController::class, 'editarArbitro']); // Editar
+
+
+
+
+
 
 
 // Protected Routes.
