@@ -12,8 +12,23 @@ class ArbitroController extends Controller
     //Listar Arbitro
     public function listarArbitro()
     {
-        $arbitro = Arbitro::all();
+        try{
+            $arbitro = Arbitro::all();
         return response()->json($arbitro);
+        }
+        catch(\Throwable $th){
+            return response()->json([
+                'message'=>$th->getMessage(),
+                'status'=>false
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    
+        return response()->json([
+            'message'=> 'okey',
+            'status'=>true,
+            'arbitro' => $arbitro,
+        ], Response::HTTP_OK);
+        
     }
     //crear Arbitro
    public function crearArbitro(Request $request){
@@ -53,56 +68,64 @@ class ArbitroController extends Controller
         'arbitro' => $arbitro,
     ], Response::HTTP_OK);
    }
+
    //Consultar Arbitro
    public function consultarArbitro($id)
-{
-    $arbitro = Arbitro::find($id);
-    if (!$arbitro) {
-        return response()->json(['message' => 'Arbitro no encontrado'], 404);
+    {
+        try {
+            $arbitro = Arbitro::find($id);
+            if (!$arbitro) {
+                return response()->json(['message' => 'Arbitro no encontrado'], 404);
+            }
+            return response()->json($arbitro, 200);
+        } catch(\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+                'status' => false
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
-    return response()->json($arbitro, 200);
-}
+
     //Editar Arbitro
     public function editarArbitro(Request $request, $id)
     {
-        $arbitro = Arbitro::find($id);
-        if (!$arbitro) {
-            return response()->json(['message' => 'Arbitro no encontrado'], 404);
+        try{
+            $arbitro = Arbitro::find($id);
+            if (!$arbitro) {
+                return response()->json(['message' => 'Arbitro no encontrado'], 404);
+            }
+    
+            $validator = Validator::make($request->all(), [
+                'primer_nombre' => 'required|string|max:255',
+                'primer_apellido' => 'required|string|max:255',
+                'direccion' => 'required|string|max:255',
+                'telefono' => 'required|numeric|min:8'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+            }
+    
+            $arbitro->update($request->all());
+    
+            return response()->json([
+                'message' => 'Arbitro actualizado exitosamente',
+                'status' => true,
+                'arbitro' => $arbitro,
+            ], Response::HTTP_OK);
         }
-
-        $validator = Validator::make($request->all(), [
-            'primer_nombre' => 'required|string|max:255',
-            'primer_apellido' => 'required|string|max:255',
-            'direccion' => 'required|string|max:255',
-            'telefono' => 'required|numeric|min:8'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+        catch(\Throwable $th){
+            return response()->json([
+                'message'=>$th->getMessage(),
+                'status'=>false
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-        $arbitro->update($request->all());
-
+    
         return response()->json([
-            'message' => 'Arbitro actualizado exitosamente',
-            'status' => true,
+            'message'=> 'okey',
+            'status'=>true,
             'arbitro' => $arbitro,
         ], Response::HTTP_OK);
-    }
-
-    // Eliminar Arbitro
-    public function eliminarArbitro($id)
-    {
-        $arbitro = Arbitro::find($id);
-        if (!$arbitro) {
-            return response()->json(['message' => 'Arbitro no encontrado'], 404);
-        }
-
-        $arbitro->delete();
-
-        return response()->json([
-            'message' => 'Arbitro eliminado exitosamente',
-            'status' => true,
-        ], Response::HTTP_OK);
+        
     }
 }

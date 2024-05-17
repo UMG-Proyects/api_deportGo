@@ -30,6 +30,11 @@ Route::post('crearArbitro', [ArbitroController::class, 'crearArbitro']);//Crear
 Route::get('consultarArbitro/{id}', [ArbitroController::class, 'consultarArbitro']);//Consultar
 Route::put('editarArbitro/{id}', [ArbitroController::class, 'editarArbitro']); // Editar
 
+//rutas para categoria
+//Route::get('listarCategoria', [categoriaController::class, 'listarCategoria']);//Listar
+//Route::post('crearCategoria', [categoriaController::class, 'crearCategoria']);//Crear
+//Route::get('consultarArbitro/{id}', [categoriaController::class, 'consultarCategoria']);//Consultar
+//Route::put('editarArbitro/{id}', [categoriaController::class, 'editarCategoria']); // Editar
 
 
 
