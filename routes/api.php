@@ -63,3 +63,10 @@ Route::get('listarPatrocinadores', [sponsorsController::class, 'listarPatrocinad
 Route::get('consultarPatrocinadores/{id}', [sponsorsController::class, 'consultarPatrocinadores']);
 Route::put('editarPatrocinadores/{id}', [sponsorsController::class, 'editarPatrocinadores']);
 Route::put('desactivarPatrocinador/{id}', [sponsorsController::class, 'desactivarPatrocinador']);
+
+// Rutas para municipios
+Route::get('listarMunicipios', [MunicipioController::class, 'listarMunicipios']); // Listar
+Route::post('crearMunicipio', [MunicipioController::class, 'crearMunicipio']); // Crear
+Route::get('consultarMunicipio/{id}', [MunicipioController::class, 'consultarMunicipio']); // Consultar
+Route::put('editarMunicipio/{id}', [MunicipioController::class, 'editarMunicipio']); // Editar
+Route::put('desactivarMunicipio/{id}', [MunicipioController::class, 'desactivarMunicipio']); // Desactivar
