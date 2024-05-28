@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArbitroController;
 use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\MunicipioController;
+use App\Http\Controllers\OrganizacionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +72,11 @@ Route::post('crearMunicipio', [MunicipioController::class, 'crearMunicipio']); /
 Route::get('consultarMunicipio/{id}', [MunicipioController::class, 'consultarMunicipio']); // Consultar
 Route::put('editarMunicipio/{id}', [MunicipioController::class, 'editarMunicipio']); // Editar
 Route::put('desactivarMunicipio/{id}', [MunicipioController::class, 'desactivarMunicipio']); // Desactivar
+
+// Rutas para organizaciones
+Route::get('listarOrganizaciones', [OrganizacionesController::class, 'index']); // Listar
+Route::post('crearOrganizacion', [OrganizacionesController::class, 'store']); // Crear
+Route::get('consultarOrganizacion/{id}', [OrganizacionesController::class, 'show']); // Consultar
+Route::put('editarOrganizacion/{id}', [OrganizacionesController::class, 'update']); // Editar
+Route::put('desactivarOrganizacion/{id}', [OrganizacionesController::class, 'desactivar']); // Desactivar
+
