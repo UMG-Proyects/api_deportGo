@@ -145,7 +145,7 @@ public function desactivarEvento($id)
             $eventos->desactivar();
 
             return response()->json([
-                'message' => 'Arbitro eliminado',
+                'message' => 'Evento eliminado',
                 'status' => true,
                 'eventos' => $eventos,
             ], Response::HTTP_OK);

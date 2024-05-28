@@ -10,6 +10,7 @@ use App\Http\Controllers\SportsController;
 use App\Http\Controllers\sponsorsController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\OrganizacionesController;
+use App\Http\Controllers\EquipoController;
 
 
 /*
@@ -50,6 +51,14 @@ Route::post('crearEventos', [EventosController::class, 'crearEventos']);//Crear
 Route::get('consultarEvento/{id}', [EventosController::class, 'consultarEvento']);//Consultar
 Route::put('editarEvento/{id}', [EventosController::class, 'editarEvento']); // Editar
 Route::put('desactivarEvento/{id}', [EventosController::class, 'desactivarEvento']);
+
+//Rutas equipos
+Route::get('listarEquipo', [EquipoController::class, 'listarEquipo']); // listar
+Route::post('crearEquipo', [EquipoController::class, 'crearEquipo']);//Crear
+Route::get('consultarEquipo/{id}', [EquipoController::class, 'consultarEquipo']);//Consultar
+Route::put('editarEquipo/{id}', [EquipoController::class, 'editarEquipo']); // Editar
+Route::put('desactivarEquipo/{id}', [EquipoController::class, 'desactivarEquipo']);
+
 
 
 // Protected Routes.
