@@ -4,7 +4,10 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArbitroController;
-use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\MunicipioController;
+use App\Http\Controllers\sponsorsController;
+use App\Http\Controllers\SportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,16 +36,10 @@ Route::put('editarArbitro/{id}', [ArbitroController::class, 'editarArbitro']); /
 Route::put('desactivarArbitro/{id}', [ArbitroController::class, 'desactivarArbitro']);
 
 //rutas para categoria
-Route::get('listCat', [categoriaController::class, 'listCat']);//Listar
-Route::post('crearCat', [categoriaController::class, 'crearCat']);//Crear
-Route::get('consultarCat/{id}', [categoriaController::class, 'consultarCat']);//Consultar
-Route::put('editarCat/{id}', [categoriaController::class, 'editarCat']); // Editar
-
-
-
-
-
-
+Route::get('listCat', [CategoriaController::class, 'listCat']);//Listar
+Route::post('crearCat', [CategoriaController::class, 'crearCat']);//Crear
+Route::get('consultarCat/{id}', [CategoriaController::class, 'consultarCat']);//Consultar
+Route::put('editarCat/{id}', [CategoriaController::class, 'editarCat']); // Editar
 
 // Protected Routes.
 Route::middleware(['auth:sanctum'])->group(function () {
