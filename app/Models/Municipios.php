@@ -5,20 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Municipio extends Model
+class Municipios extends Model
 {
     use HasFactory;
-    
+
     protected $primaryKey = 'id';
-    protected $table = 'municipios';
+    protected $table = 'tb_municipios';
     protected $fillable = [
-        'municipio',
-        'departamento'
+        'Municipio',
+        'Departamento'
     ];
-    
-    public function desactivar()
-    {
-        $this->activo = 0;
-        $this->save();
-    }
 }

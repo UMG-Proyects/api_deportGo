@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Municipio;
+use App\Models\Municipios;
 
-class MunicipioSeeder extends Seeder
+class municipiosSeeder extends Seeder
 {
     public function run()
     {
-        Municipio::create(['municipio'=>'Municipio Ejemplo','departamento'=>'Departamento Ejemplo']);
+        Municipios::create(['municipio'=>'Municipio Ejemplo','departamento'=>'Departamento Ejemplo']);
     }
 }
