@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArbitroController;
 use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\EventosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +39,12 @@ Route::post('crearCat', [categoriaController::class, 'crearCat']);//Crear
 Route::get('consultarCat/{id}', [categoriaController::class, 'consultarCat']);//Consultar
 Route::put('editarCat/{id}', [categoriaController::class, 'editarCat']); // Editar
 
-
-
-
-
+//Rutas eventos
+Route::get('listarEventos', [EventosController::class, 'listarEventos']); // listar
+Route::post('crearEventos', [EventosController::class, 'crearEventos']);//Crear
+Route::get('consultarEvento/{id}', [EventosController::class, 'consultarEvento']);//Consultar
+Route::put('editarEvento/{id}', [EventosController::class, 'editarEvento']); // Editar
+Route::put('desactivarEvento/{id}', [EventosController::class, 'desactivarEvento']);
 
 
 // Protected Routes.
