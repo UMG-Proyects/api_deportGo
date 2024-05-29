@@ -13,7 +13,7 @@ class OrganizacionesController extends Controller
     public function listarOrganizaciones()
     {
         try {
-            $organizaciones = Organizaciones::where('estado', true)->get();
+            $organizaciones = Organizacion::where('estado', true)->get();
             return response()->json($organizaciones);
         } catch (\Throwable $th) {
             return response()->json([

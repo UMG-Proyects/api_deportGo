@@ -11,6 +11,7 @@ use App\Http\Controllers\sponsorsController;
 use App\Http\Controllers\MunicipiosController;
 use App\Http\Controllers\OrganizacionesController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\InscripcionController;
 
 /*
 |--------------------------------------------------------------------------
