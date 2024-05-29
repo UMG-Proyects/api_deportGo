@@ -4,14 +4,13 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArbitroController;
-use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\SportsController;
 use App\Http\Controllers\sponsorsController;
-use App\Http\Controllers\MunicipioController;
+use App\Http\Controllers\MunicipiosController;
 use App\Http\Controllers\OrganizacionesController;
 use App\Http\Controllers\EquipoController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +39,10 @@ Route::put('editarArbitro/{id}', [ArbitroController::class, 'editarArbitro']); /
 Route::put('desactivarArbitro/{id}', [ArbitroController::class, 'desactivarArbitro']);
 
 //rutas para categoria
-Route::get('listCat', [categoriaController::class, 'listCat']);//Listar
-Route::post('crearCat', [categoriaController::class, 'crearCat']);//Crear
-Route::get('consultarCat/{id}', [categoriaController::class, 'consultarCat']);//Consultar
-Route::put('editarCat/{id}', [categoriaController::class, 'editarCat']); // Editar
+Route::get('listCat', [CategoriaController::class, 'listCat']);//Listar
+Route::post('crearCat', [CategoriaController::class, 'crearCat']);//Crear
+Route::get('consultarCat/{id}', [CategoriaController::class, 'consultarCat']);//Consultar
+Route::put('editarCat/{id}', [CategoriaController::class, 'editarCat']); // Editar
 
 //Rutas eventos
 Route::get('listarEventos', [EventosController::class, 'listarEventos']); // listar
@@ -58,8 +57,6 @@ Route::post('crearEquipo', [EquipoController::class, 'crearEquipo']);//Crear
 Route::get('consultarEquipo/{id}', [EquipoController::class, 'consultarEquipo']);//Consultar
 Route::put('editarEquipo/{id}', [EquipoController::class, 'editarEquipo']); // Editar
 Route::put('desactivarEquipo/{id}', [EquipoController::class, 'desactivarEquipo']);
-
-
 
 // Protected Routes.
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -82,11 +79,11 @@ Route::put('editarPatrocinadores/{id}', [sponsorsController::class, 'editarPatro
 Route::put('desactivarPatrocinador/{id}', [sponsorsController::class, 'desactivarPatrocinador']);
 
 // Rutas para municipios
-Route::get('listarMunicipios', [MunicipioController::class, 'listarMunicipios']); // Listar
-Route::post('crearMunicipio', [MunicipioController::class, 'crearMunicipio']); // Crear
-Route::get('consultarMunicipio/{id}', [MunicipioController::class, 'consultarMunicipio']); // Consultar
-Route::put('editarMunicipio/{id}', [MunicipioController::class, 'editarMunicipio']); // Editar
-Route::put('desactivarMunicipio/{id}', [MunicipioController::class, 'desactivarMunicipio']); // Desactivar
+Route::get('listarMunicipios', [MunicipiosController::class, 'listarMunicipios']); // Listar
+Route::post('crearMunicipio', [MunicipiosController::class, 'crearMunicipio']); // Crear
+Route::get('consultarMunicipio/{id}', [MunicipiosController::class, 'consultarMunicipio']); // Consultar
+Route::put('editarMunicipio/{id}', [MunicipiosController::class, 'editarMunicipio']); // Editar
+Route::put('desactivarMunicipio/{id}', [MunicipiosController::class, 'desactivarMunicipio']); // Desactivar
 
 // Rutas para organizaciones
 Route::get('listarOrganizaciones', [OrganizacionesController::class, 'index']); // Listar
@@ -94,4 +91,3 @@ Route::post('crearOrganizacion', [OrganizacionesController::class, 'store']); //
 Route::get('consultarOrganizacion/{id}', [OrganizacionesController::class, 'show']); // Consultar
 Route::put('editarOrganizacion/{id}', [OrganizacionesController::class, 'update']); // Editar
 Route::put('desactivarOrganizacion/{id}', [OrganizacionesController::class, 'desactivar']); // Desactivar
-

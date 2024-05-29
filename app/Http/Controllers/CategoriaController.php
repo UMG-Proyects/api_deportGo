@@ -13,7 +13,7 @@ class CategoriaController extends Controller
     public function listCat()
     {
         try {
-            $categoria = Categoria::all();
+            $categoria = categoria::all();
             return response()->json($categoria);
         } catch (\Throwable $th) {
             return response()->json([

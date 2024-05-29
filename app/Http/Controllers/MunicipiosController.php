@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
 
-class MunicipioController extends Controller
+class MunicipiosController extends Controller
 {
     // Listar Municipios
     public function listarMunicipios()
     {
         try {
-            $municipios = Municipio::all(); // Asumiendo que queremos listar todos los municipios
+            $municipios = Municipios::all(); // Asumiendo que queremos listar todos los municipios
             return response()->json($municipios);
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
                 'status' => false
@@ -42,8 +42,7 @@ class MunicipioController extends Controller
                 'status' => true,
                 'municipio' => $municipio
             ], Response::HTTP_OK);
-
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
                 'status' => false
@@ -60,7 +59,7 @@ class MunicipioController extends Controller
                 return response()->json(['message' => 'Municipio no encontrado'], Response::HTTP_NOT_FOUND);
             }
             return response()->json($municipio, Response::HTTP_OK);
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
                 'status' => false
@@ -92,7 +91,7 @@ class MunicipioController extends Controller
                 'status' => true,
                 'municipio' => $municipio
             ], Response::HTTP_OK);
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
                 'status' => false
@@ -115,8 +114,7 @@ class MunicipioController extends Controller
                 'status' => true,
                 'municipio' => $municipio
             ], Response::HTTP_OK);
-
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
                 'status' => false
