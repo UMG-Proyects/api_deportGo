@@ -22,6 +22,7 @@ class InscripcionController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
+                'nombre'=> 'requerid|string',
                 'tarifa' => 'integer',
                 'fecha' => 'required|date',
                 'id_evento' => 'required|integer',
@@ -45,7 +46,7 @@ class InscripcionController extends Controller
             if ($fechaInscripcion->gt($fechaInicioEvento)) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Evento no disponible, la fecha de finalización del evento es: ' . Carbon::parse($evento->fecha_final)->toDateString()
+                    'message' => 'Evento no disponible'
                 ], Response::HTTP_BAD_REQUEST);
             }
 
@@ -55,7 +56,7 @@ class InscripcionController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => 'El evento ha alcanzado el número máximo de participantes permitidos'
-                ], Response::HTTP_BAD_REQUEST);
+                ], 429);
             }
 
             // Crear la inscripción
@@ -116,6 +117,7 @@ class InscripcionController extends Controller
             }
 
             $validator = Validator::make($request->all(), [
+                'nombre'=> 'requerid|string',
                 'tarifa' => 'integer',
                 'fecha' => 'required|date',
                 'id_evento' => 'required|integer',
