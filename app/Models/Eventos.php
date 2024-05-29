@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class eventos extends Model
+class Eventos extends Model
 {
     use HasFactory;
     protected $primaryKey='id';
@@ -22,14 +22,14 @@ class eventos extends Model
         'fecha_final',
         'equipos_participantes',
         'rama'
-    ]; 
-    
+    ];
+
     public function desactivar()
     {
         $this->estado = 0;
         $this->save();
     }
-    
+
     public function categoria()
     {
         return $this->hasMany(categoria::class);

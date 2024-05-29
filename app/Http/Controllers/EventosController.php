@@ -9,52 +9,50 @@ use Illuminate\Http\Response;
 
 class EventosController extends Controller
 {
-   // Listar eventos
-   public function listarEventos()
-   {
-       try {
-           $eventos = Eventos::where('estado', 1)->get();
-           return response()->json($eventos);
-       } catch(\Throwable $th) {
-           return response()->json([
+    // Listar eventos
+    public function listarEventos()
+    {
+        try {
+            $eventos = Eventos::where('estado', 1)->get();
+            return response()->json($eventos);
+        } catch (\Throwable $th) {
+            return response()->json([
                'message' => $th->getMessage(),
                'status' => false
            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-       }
-   
-       return response()->json([
+        }
+
+        return response()->json([
            'message' => 'okey',
            'status' => true,
-           'eventos' => $eventos, 
+           'eventos' => $eventos,
        ], Response::HTTP_OK);
-   }
-   //crear Eventos
-public function crearEventos(Request $request){
-    
-    try{
-        $validator = Validator::make($request->all(), [
+    }
+    //crear Eventos
+    public function crearEventos(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
             'id_categoria' => 'required|integer',
             'id_deporte' => 'required|integer',
             'id_patrocinador' => 'required|integer',
             'id_municipio' => 'required|integer',
-            'participantes' => 'required|integer',
             'nombre' => 'required|string|max:255',
             'fecha_inicio' => 'required|date',
             'fecha_final' => 'nullable|date',
             'hora' => 'nullable|date_format:H:i:s',
             'equipos_participantes' => 'required|string|max:255'
         ]);
-    
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
-        }
 
-        $eventos = Eventos::create([
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+            }
+
+            $eventos = Eventos::create([
             'id_categoria' => $request->id_categoria,
             'id_deporte' => $request->id_deporte,
             'id_patrocinador' => $request->id_patrocinador,
             'id_municipio' => $request->id_municipio,
-            'participantes' => $request->participantes,
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'fecha_inicio' => $request->fecha_inicio,
@@ -64,79 +62,79 @@ public function crearEventos(Request $request){
             'ubicacion' => $request->ubicacion,
             'rama' => $request->rama,
         ]);
-    }
-    catch(\Throwable $th){
-        return response()->json([
+        } catch (\Throwable $th) {
+            return response()->json([
             'message'=>$th->getMessage(),
             'status'=>false
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
-    }
+        }
 
-    return response()->json([
+        return response()->json([
         'message'=> 'Evento creado correctamente',
         'status'=>true,
         'evento' => $eventos,
     ], Response::HTTP_OK);
-}
-//Consultar Eventos
-public function consultarEvento($id)
-{
-    try {
-        $eventos = Eventos::find($id);
-        if (!$eventos) {
-            return response()->json(['message' => 'Evento no encontrado'], 404);
-        }
-        return response()->json($eventos, 200);
-    } catch(\Throwable $th) {
-        return response()->json([
+    }
+    //Consultar Eventos
+    public function consultarEvento($id)
+    {
+        try {
+            $eventos = Eventos::find($id);
+            if (!$eventos) {
+                return response()->json(['message' => 'Evento no encontrado'], 404);
+            }
+            return response()->json($eventos, 200);
+        } catch (\Throwable $th) {
+            return response()->json([
             'message' => $th->getMessage(),
             'status' => false
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
-}
-// Editar Evento
-public function editarEvento(Request $request, $id) {
-    try {
-        $evento = Eventos::find($id);
+    // Editar Evento
+    public function editarEvento(Request $request, $id)
+    {
+        try {
+            $evento = Eventos::find($id);
 
-        if (!$evento) {
-            return response()->json([
+            if (!$evento) {
+                return response()->json([
                 'message' => 'Evento no encontrado',
                 'status' => false
             ], Response::HTTP_NOT_FOUND);
-        }
+            }
 
-        $validator = Validator::make($request->all(), [
-            'id_categoria' => 'nullable|integer',
-            'id_deporte' => 'nullable|integer',
-            'id_patrocinador' => 'nullable|integer',
-            'id_municipio' => 'nullable|integer',
-            'nombre' => 'nullable|string|max:255',
-            'fecha_inicio' => 'nullable|date',
+            $validator = Validator::make($request->all(), [
+            'id_categoria' => 'required|integer',
+            'id_deporte' => 'required|integer',
+            'id_patrocinador' => 'required|integer',
+            'id_municipio' => 'required|integer',
+            'nombre' => 'required|string|max:255',
+            'fecha_inicio' => 'required|date',
             'fecha_final' => 'nullable|date',
             'hora' => 'nullable|date_format:H:i:s',
-            'equipos_participantes' => 'nullable|string|max:255'
+            'equipos_participantes' => 'required|string|max:255'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
-        }
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+            }
 
-        $evento->update($request->all());
+            $evento->update($request->all());
 
-        return response()->json([
+            return response()->json([
             'message' => 'Evento actualizado correctamente',
             'status' => true,
             'evento' => $evento,
         ], Response::HTTP_OK);
-    } catch (\Throwable $th) {
-        return response()->json([
+        } catch (\Throwable $th) {
+            return response()->json([
             'message' => $th->getMessage(),
             'status' => false
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
-}
-public function desactivarEvento($id)
+    public function desactivarEvento($id)
     {
         try {
             $eventos = Eventos::find($id);
@@ -151,14 +149,11 @@ public function desactivarEvento($id)
                 'status' => true,
                 'eventos' => $eventos,
             ], Response::HTTP_OK);
-
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
                 'status' => false
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }
