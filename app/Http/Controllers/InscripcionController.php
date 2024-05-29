@@ -22,13 +22,6 @@ class InscripcionController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id_equipo' => 'required|integer',
-                'nombre' => 'required|string|max:255',
-                'edad' => 'integer',
-                'genero' => 'string|max:255',
-                'telefono' => 'required|integer',
-                'telefono_emergencia' => 'integer',
-                'nombre_entrenador' => 'required|string|max:255',
                 'tarifa' => 'integer',
                 'fecha' => 'required|date',
                 'id_evento' => 'required|integer',
@@ -123,13 +116,6 @@ class InscripcionController extends Controller
             }
 
             $validator = Validator::make($request->all(), [
-                'id_equipo' => 'required|integer',
-                'nombre' => 'required|string|max:255',
-                'edad' => 'integer',
-                'genero' => 'string|max:255',
-                'telefono' => 'required|integer',
-                'telefono_emergencia' => 'integer',
-                'nombre_entrenador' => 'required|string|max:255',
                 'tarifa' => 'integer',
                 'fecha' => 'required|date',
                 'id_evento' => 'required|integer',
