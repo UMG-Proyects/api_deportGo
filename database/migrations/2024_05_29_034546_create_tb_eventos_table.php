@@ -20,6 +20,7 @@ class CreateTbEventosTable extends Migration
         $table->integer('id_deporte')->nullable(false);
         $table->integer('id_patrocinador')->nullable(false);
         $table->integer('id_municipio')->nullable(false);
+        $table->integer('participantes')->nullable(false);
         $table->string('nombre', 255)->nullable(false);
         $table->string('descripcion', 255);
         $table->date('fecha_inicio')->nullable(false);

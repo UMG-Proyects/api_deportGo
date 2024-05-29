@@ -64,6 +64,8 @@ Route::put('desactivarEquipo/{id}', [EquipoController::class, 'desactivarEquipo'
 Route::get('listarInscripcion', [InscripcionController::class, 'listarInscripcion']); // listar
 Route::post('crearInscripcion', [InscripcionController::class, 'crearInscripcion']);//Crear
 Route::put('editarInscripcion/{id}', [InscripcionController::class, 'editarInscripcion']); // Editar
+Route::get('consultarInscripcion/{id}', [InscripcionController::class, 'consultarInscripcion']);//Consultar
+Route::put('desactivarInscripcion/{id}', [InscripcionController::class, 'desactivarInscripcion']);
 
 
 // Protected Routes.

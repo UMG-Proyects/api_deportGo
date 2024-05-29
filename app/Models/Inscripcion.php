@@ -16,7 +16,6 @@ class Inscripcion extends Model
         'nombre',
         'edad',
         'genero',
-        'participantes',
         'telefono',
         'telefono_emergencia',
         'nombre_entrenador',

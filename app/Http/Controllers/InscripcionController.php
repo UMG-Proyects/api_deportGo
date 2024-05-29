@@ -26,7 +26,6 @@ class InscripcionController extends Controller
                 'nombre' => 'required|string|max:255',
                 'edad' => 'integer',
                 'genero' => 'string|max:255',
-                'participantes' => 'integer',
                 'telefono' => 'required|integer',
                 'telefono_emergencia' => 'integer',
                 'nombre_entrenador' => 'required|string|max:255',
@@ -39,21 +38,31 @@ class InscripcionController extends Controller
                 return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
             }
 
+            // Buscar el evento por id
             $evento = Eventos::find($request->id_evento);
 
             if (!$evento) {
                 return response()->json(['message' => 'El evento con el ID proporcionado no existe'], Response::HTTP_NOT_FOUND);
             }
 
+            // Verificar si la fecha de inscripción es posterior a la fecha de inicio del evento
             $fechaInscripcion = Carbon::parse($request->fecha);
             $fechaInicioEvento = Carbon::parse($evento->fecha_inicio);
 
-            // Verificar si la fecha de inscripción es posterior a la fecha de inicio del evento
             if ($fechaInscripcion->gt($fechaInicioEvento)) {
-                // Construir el mensaje con la fecha de finalización del evento
-                $fechaFinalizacionEvento = Carbon::parse($evento->fecha_final)->toDateString();
-                $mensaje = 'El evento ya ha comenzado y termina: ' . $fechaFinalizacionEvento;
-                return response()->json(['message' => $mensaje], Response::HTTP_BAD_REQUEST);
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Evento no disponible, la fecha de finalización del evento es: ' . Carbon::parse($evento->fecha_final)->toDateString()
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
+            // Verificar si el número de inscripciones no excede el número total de participantes permitidos
+            $inscripcionesExistentes = Inscripcion::where('id_evento', $request->id_evento)->count();
+            if ($inscripcionesExistentes >= $evento->participantes) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'El evento ha alcanzado el número máximo de participantes permitidos'
+                ], Response::HTTP_BAD_REQUEST);
             }
 
             // Crear la inscripción
@@ -63,7 +72,6 @@ class InscripcionController extends Controller
                 'nombre' => $request->nombre,
                 'edad' => $request->edad,
                 'genero' => $request->genero,
-                'participantes' => $request->participantes,
                 'telefono' => $request->telefono,
                 'telefono_emergencia' => $request->telefono_emergencia,
                 'nombre_entrenador' => $request->nombre_entrenador,
@@ -84,7 +92,24 @@ class InscripcionController extends Controller
         }
     }
 
-    // Editar inscripciones
+    // Consultar inscripción
+    public function consultarInscripcion($id)
+    {
+        try {
+            $inscripcion = Inscripcion::find($id);
+            if (!$inscripcion) {
+                return response()->json(['message' => 'Inscripción no encontrada'], 404);
+            }
+            return response()->json($inscripcion, 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+                'status' => false
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Editar inscripción
     public function editarInscripcion(Request $request, $id)
     {
         try {
@@ -102,7 +127,6 @@ class InscripcionController extends Controller
                 'nombre' => 'required|string|max:255',
                 'edad' => 'integer',
                 'genero' => 'string|max:255',
-                'participantes' => 'integer',
                 'telefono' => 'required|integer',
                 'telefono_emergencia' => 'integer',
                 'nombre_entrenador' => 'required|string|max:255',
@@ -122,6 +146,31 @@ class InscripcionController extends Controller
                 'status' => true,
                 'inscripcion' => $inscripcion,
             ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+                'status' => false
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Desactivar inscripción
+    public function desactivarInscripcion($id)
+    {
+        try {
+            $inscripcion = Inscripcion::find($id);
+            if (!$inscripcion) {
+                return response()->json(['message' => 'Inscripción no encontrada'], 404);
+            }
+
+            $inscripcion->desactivar();
+
+            return response()->json([
+                'message' => 'Inscripción desactivada',
+                'status' => true,
+                'inscripcion' => $inscripcion,
+            ], Response::HTTP_OK);
+
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),

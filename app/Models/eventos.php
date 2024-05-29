@@ -15,6 +15,7 @@ class eventos extends Model
         'id_deporte',
         'id_patrocinador',
         'id_municipio',
+        'participantes',
         'nombre',
         'descripcion',
         'fecha_inicio',
