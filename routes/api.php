@@ -11,6 +11,7 @@ use App\Http\Controllers\sponsorsController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\OrganizacionesController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\InscripcionController;
 
 
 /*
@@ -59,6 +60,10 @@ Route::get('consultarEquipo/{id}', [EquipoController::class, 'consultarEquipo'])
 Route::put('editarEquipo/{id}', [EquipoController::class, 'editarEquipo']); // Editar
 Route::put('desactivarEquipo/{id}', [EquipoController::class, 'desactivarEquipo']);
 
+//rutas inscripcion
+Route::get('listarInscripcion', [InscripcionController::class, 'listarInscripcion']); // listar
+Route::post('crearInscripcion', [InscripcionController::class, 'crearInscripcion']);//Crear
+Route::put('editarInscripcion/{id}', [InscripcionController::class, 'editarInscripcion']); // Editar
 
 
 // Protected Routes.
