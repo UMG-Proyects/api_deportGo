@@ -38,7 +38,6 @@ class InscripcionController extends Controller
             if (!$evento) {
                 return response()->json(['message' => 'El evento con el ID proporcionado no existe'], Response::HTTP_NOT_FOUND);
             }
-
             // Verificar si la fecha de inscripción es posterior a la fecha de inicio del evento
             $fechaInscripcion = Carbon::parse($request->fecha);
             $fechaInicioEvento = Carbon::parse($evento->fecha_inicio);
