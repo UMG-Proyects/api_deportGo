@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\eventos;
+use App\Models\Eventos;
 
 class eventosSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class eventosSeeder extends Seeder
     public function run()
     {
         //
-        eventos::create(['id_categoria' => 1,'id_deporte' => 1,'id_patrocinador' => 1,'id_municipio' => 1,'nombre' => 'nombre1','descripcion' => 'descripcion','fecha_inicio' => '2024-05-12','fecha_final' => '2024-05-12','equipos_participantes' => 'equipo1', 'ubicacion' => 'Estadio Municipal','rama' => 'rama1']);
+        Eventos::create(['id_categoria' => 1,'id_deporte' => 1,'id_patrocinador' => 1,'id_municipio' => 1,'nombre' => 'nombre1','descripcion' => 'descripcion','fecha_inicio' => '2024-05-12','fecha_final' => '2024-05-12','equipos_participantes' => 'equipo1', 'ubicacion' => 'Estadio Municipal','rama' => 'rama1']);
 
     }
 }

@@ -92,3 +92,12 @@ Route::post('crearOrganizacion', [OrganizacionesController::class, 'store']); //
 Route::get('consultarOrganizacion/{id}', [OrganizacionesController::class, 'show']); // Consultar
 Route::put('editarOrganizacion/{id}', [OrganizacionesController::class, 'update']); // Editar
 Route::put('desactivarOrganizacion/{id}', [OrganizacionesController::class, 'desactivar']); // Desactivar
+
+
+//rutas inscripcion
+Route::get('listarInscripcion', [InscripcionController::class, 'listarInscripcion']); // listar
+Route::post('crearInscripcion', [InscripcionController::class, 'crearInscripcion']);//Crear
+Route::put('editarInscripcion/{id}', [InscripcionController::class, 'editarInscripcion']); // Editar
+Route::get('consultarInscripcion/{id}', [InscripcionController::class, 'consultarInscripcion']);//Consultar
+Route::put('desactivarInscripcion/{id}', [InscripcionController::class, 'desactivarInscripcion']);
+Route::post('obtenerInscripcionesPorEvento', [InscripcionController::class, 'obtenerInscripcionesPorEvento']);
