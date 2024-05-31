@@ -22,7 +22,7 @@ class InscripcionController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'nombre'=> 'requerid|string',
+                'nombre'=> 'required|string',
                 'tarifa' => 'integer',
                 'fecha' => 'required|date',
                 'id_evento' => 'required|integer',
