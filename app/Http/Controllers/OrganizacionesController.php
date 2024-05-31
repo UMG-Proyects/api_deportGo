@@ -13,7 +13,7 @@ class OrganizacionesController extends Controller
     public function listarOrganizaciones()
     {
         try {
-            $organizaciones = Organizacion::where('estado', true)->get();
+            $organizaciones = Organizaciones::where('estado', true)->get();
             return response()->json($organizaciones);
         } catch (\Throwable $th) {
             return response()->json([
@@ -38,7 +38,7 @@ class OrganizacionesController extends Controller
                 return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
             }
 
-            $organizacion = Organizacion::create($request->all());
+            $organizacion = Organizaciones::create($request->all());
             return response()->json([
                 'message' => 'Organización creada exitosamente',
                 'status' => true,
@@ -56,7 +56,7 @@ class OrganizacionesController extends Controller
     public function consultarOrganizacion($id)
     {
         try {
-            $organizacion = Organizacion::find($id);
+            $organizacion = Organizaciones::find($id);
             if (!$organizacion) {
                 return response()->json(['message' => 'Organización no encontrada'], Response::HTTP_NOT_FOUND);
             }
@@ -73,7 +73,7 @@ class OrganizacionesController extends Controller
     public function editarOrganizacion(Request $request, $id)
     {
         try {
-            $organizacion = Organizacion::find($id);
+            $organizacion = Organizaciones::find($id);
             if (!$organizacion) {
                 return response()->json(['message' => 'Organización no encontrada'], Response::HTTP_NOT_FOUND);
             }
@@ -107,7 +107,7 @@ class OrganizacionesController extends Controller
     public function desactivarOrganizacion($id)
     {
         try {
-            $organizacion = Organizacion::find($id);
+            $organizacion = Organizaciones::find($id);
             if (!$organizacion) {
                 return response()->json(['message' => 'Organización no encontrada'], Response::HTTP_NOT_FOUND);
             }

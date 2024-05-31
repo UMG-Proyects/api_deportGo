@@ -44,6 +44,6 @@ class Eventos extends Model
     }
     public function municipio()
     {
-        return $this->hasMany(municipio::class);
+        return $this->hasMany(Municipios::class);
     }
 }
