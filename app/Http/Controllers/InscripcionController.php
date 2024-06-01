@@ -24,7 +24,6 @@ class InscripcionController extends Controller
             $validator = Validator::make($request->all(), [
                 'nombre' => 'required|string',
                 'tarifa' => 'integer',
-                'fecha' => 'required|date',
                 'id_evento' => 'required|integer',
             ]);
 
@@ -67,9 +66,7 @@ class InscripcionController extends Controller
               'genero' => $request->genero,
               'telefono' => $request->telefono,
               'telefono_emergencia' => $request->telefono_emergencia,
-              'nombre_entrenador' => $request->nombre_entrenador,
               'tarifa' => $request->tarifa,
-              'fecha' => $request->fecha,
 ]);
 
             return response()->json([
@@ -173,7 +170,6 @@ class InscripcionController extends Controller
                 'status' => true,
                 'inscripcion' => $inscripcion,
             ], Response::HTTP_OK);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
