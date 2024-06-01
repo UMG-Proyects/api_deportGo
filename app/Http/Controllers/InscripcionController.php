@@ -51,7 +51,7 @@ class InscripcionController extends Controller
 
             // Verificar si el número de inscripciones no excede el número total de participantes permitidos
             $totalInscripciones = $this->obtenerInscripcionesPorEvento($request)->getData()->total;
-            if ($totalInscripciones >= 3) {
+            if ($totalInscripciones >= 2) {
                 return response()->json([
                     'status' => false,
                     'message' => 'El evento ha alcanzado el número máximo de participantes permitidos'
