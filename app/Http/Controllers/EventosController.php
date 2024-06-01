@@ -41,8 +41,15 @@ class EventosController extends Controller
             'fecha_inicio' => 'required|date',
             'fecha_final' => 'nullable|date',
             'hora' => 'nullable|date_format:H:i:s',
-            'equipos_participantes' => 'required|string|max:255'
+            'equipos_participantes' => 'required|string|max:255',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+            if ($request->hasFile('imagen')) {
+                $file = $request->file('imagen');
+                $path = $file->store('public/imagenes'); // Guarda la imagen en el directorio 'public/imagenes'
+                $data['imagen'] = $path;
+            }
 
             if ($validator->fails()) {
                 return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
@@ -61,17 +68,18 @@ class EventosController extends Controller
             'equipos_participantes' => $request->equipos_participantes,
             'ubicacion' => $request->ubicacion,
             'rama' => $request->rama,
+            'imagen' => $data['imagen'] ?? null
         ]);
         } catch (\Throwable $th) {
             return response()->json([
-            'message'=>$th->getMessage(),
-            'status'=>false
+            'message' => $th->getMessage(),
+            'status' => false
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return response()->json([
-        'message'=> 'Evento creado correctamente',
-        'status'=>true,
+        'message' => 'Evento creado correctamente',
+        'status' => true,
         'evento' => $eventos,
     ], Response::HTTP_OK);
     }

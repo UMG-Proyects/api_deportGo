@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Eventos extends Model
 {
     use HasFactory;
-    protected $primaryKey='id';
-    protected $table='tb_eventos';
+    protected $primaryKey = 'id';
+    protected $table = 'tb_eventos';
     protected $fillable = [
         'id_categoria',
         'id_deporte',
@@ -21,7 +21,8 @@ class Eventos extends Model
         'fecha_inicio',
         'fecha_final',
         'equipos_participantes',
-        'rama'
+        'rama',
+        'imagen'
     ];
 
     public function desactivar()
