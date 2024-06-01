@@ -78,10 +78,10 @@ class CalendarioController extends Controller
     
     
     //Consultar Arbitro
-    public function consultarCalendario($id)
+    public function consultarCalendario($id_deportes)
     {
         try {
-            $calendario = Calendario::find($id);
+            $calendario = Calendario::find($id_deportes);
             if (!$calendario) {
                 return response()->json(['message' => 'Calendario no encontrado'], 404);
             }
