@@ -31,43 +31,52 @@ class CalendarioController extends Controller
     //crear Calendario
     public function crearCalendario(Request $request)
     {
-        
         try {
             $validator = Validator::make($request->all(), [
-                'id_deportes' => 'nullable|integer',
+                'id_arbitro' => 'required|integer',
+                'id_equipo1' => 'required|integer',
+                'id_equipo2' => 'required|integer|different:id_equipo1',
+                'id_deportes' => 'required|integer',
                 'fecha' => 'required|date',
                 'hora' => 'required|date_format:H:i:s',
-        ]);
-
+                'direccion' => 'required|string',
+                'resultadoA' => 'nullable|integer',
+                'resultadoB' => 'nullable|integer',
+                'Cancha' => 'required|string',
+            ]);
+    
             if ($validator->fails()) {
                 return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
             }
-
+    
             $calendario = Calendario::create([
-                'estado' => $request->input('estado', true),
+                'estado' => true, // valor predeterminado en caso de que no se proporcione en la solicitud
                 'id_arbitro' => $request->input('id_arbitro'),
-                'id_equipo' => $request->input('id_equipo'),
+                'id_equipo1' => $request->input('id_equipo1'),
+                'id_equipo2' => $request->input('id_equipo2'),
                 'id_deportes' => $request->input('id_deportes'),
                 'fecha' => $request->input('fecha'),
-                'hora' => $request->input('hora', '12:00:00'),
+                'hora' => $request->input('hora', '12:00:00'), // valor predeterminado en caso de que no se proporcione en la solicitud
                 'direccion' => $request->input('direccion'),
                 'resultadoA' => $request->input('resultadoA'),
                 'resultadoB' => $request->input('resultadoB'),
                 'Cancha' => $request->input('Cancha'),
-        ]);
+            ]);
+            
+            return response()->json([
+                'message' => 'Calendario creado correctamente.',
+                'status' => true,
+                'calendario' => $calendario,
+            ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
-            'message'=>$th->getMessage(),
-            'status'=>false
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                'message' => 'Error interno del servidor: ' . $th->getMessage(),
+                'status' => false
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-        return response()->json([
-        'message'=> 'okey',
-        'status'=>true,
-        'calendario' => $calendario,
-    ], Response::HTTP_OK);
     }
+    
+    
     //Consultar Arbitro
     public function consultarCalendario($id)
     {
@@ -86,43 +95,40 @@ class CalendarioController extends Controller
     }
     //Editar Arbitro
     public function editarCalendario(Request $request, $id)
-    {
-        try {
-            $calendario = Calendario::find($id);
-            if (!$calendario) {
-                return response()->json(['message' => 'Calendario no encontrado'], 404);
-            }
-
-            $validator = Validator::make($request->all(), [
-                'id_deportes' => 'nullable|integer',
-                'fecha' => 'required|date',
-                'hora' => 'required|date_format:H:i:s'
-            ]);
-
-            if ($validator->fails()) {
-                return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
-            }
-
-            $calendario->update($request->all());
-
-            return response()->json([
-                'message' => 'Calendario actualizado exitosamente',
-                'status' => true,
-                'calendario' => $calendario,
-            ], Response::HTTP_OK);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'message'=>$th->getMessage(),
-                'status'=>false
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+{
+    try {
+        $calendario = Calendario::find($id);
+        if (!$calendario) {
+            return response()->json(['message' => 'Calendario no encontrado'], 404);
         }
 
+        $validator = Validator::make($request->all(), [
+            'id_deportes' => 'nullable|integer',
+            'fecha' => 'required|date',
+            'hora' => 'required|date_format:H:i:s'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
+        $calendario->update($request->all());
+
         return response()->json([
-            'message'=> 'okey',
-            'status'=>true,
+            'message' => 'Calendario actualizado exitosamente',
+            'status' => true,
             'calendario' => $calendario,
         ], Response::HTTP_OK);
+    } catch (\Throwable $th) {
+        return response()->json([
+            'message'=>$th->getMessage(),
+            'status'=>false
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
+}
+
+
+
     public function desactivarCalendario($id)
     {
         try {

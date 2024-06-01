@@ -11,7 +11,8 @@ class Calendario extends Model
     protected $table='tb_calendario';
     protected $fillable = [
         'id_arbitro',
-        'id_equipo',
+        'id_equipo1',
+        'id_equipo2',
         'id_deportes',
         'fecha',
         'hora',
