@@ -39,4 +39,16 @@ class Calendario extends Model
     {
         return $this->hasMany(deporte::class);
     }
+
+
+    // In your Calendario model
+    public function equipo1()
+    {
+        return $this->belongsTo(Equipo::class, 'id_equipo1');
+    }
+
+    public function equipo2()
+    {
+        return $this->belongsTo(Equipo::class, 'id_equipo2');
+    }
 }
