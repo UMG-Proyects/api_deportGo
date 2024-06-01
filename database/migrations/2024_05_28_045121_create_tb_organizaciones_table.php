@@ -18,8 +18,8 @@ class CreateTbOrganizacionesTable extends Migration
             $table->boolean('estado')->default(true);
             $table->string('nombre', 255)->nullable(false);
             $table->integer('telefono')->nullable(false);
-            $table->string('correo_electronico', 255)->nullable(false);
-            $table->string('no_de_cuenta', 255)->nullable(false); // Asumiendo que es un string; ajustar según el tipo de dato requerido
+            $table->string('correo_electronico', 255)->nullable(true);
+            $table->string('no_de_cuenta', 255)->nullable(true); // Asumiendo que es un string; ajustar según el tipo de dato requerido
             $table->timestamps();
         });
     }

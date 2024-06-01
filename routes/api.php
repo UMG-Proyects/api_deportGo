@@ -12,6 +12,7 @@ use App\Http\Controllers\MunicipiosController;
 use App\Http\Controllers\OrganizacionesController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\CalendarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,11 +94,18 @@ Route::get('consultarOrganizacion/{id}', [OrganizacionesController::class, 'show
 Route::put('editarOrganizacion/{id}', [OrganizacionesController::class, 'update']); // Editar
 Route::put('desactivarOrganizacion/{id}', [OrganizacionesController::class, 'desactivar']); // Desactivar
 
-
 //rutas inscripcion
 Route::get('listarInscripcion', [InscripcionController::class, 'listarInscripcion']); // listar
 Route::post('crearInscripcion', [InscripcionController::class, 'crearInscripcion']);//Crear
 Route::put('editarInscripcion/{id}', [InscripcionController::class, 'editarInscripcion']); // Editar
 Route::get('consultarInscripcion/{id}', [InscripcionController::class, 'consultarInscripcion']);//Consultar
 Route::put('desactivarInscripcion/{id}', [InscripcionController::class, 'desactivarInscripcion']);
-Route::post('obtenerInscripcionesPorEvento', [InscripcionController::class, 'obtenerInscripcionesPorEvento']);
+
+//rutas de calendario
+Route::get('listarCalendario', [CalendarioController::class, 'listarCalendario']); // listar
+Route::post('crearCalendario', [CalendarioController::class, 'crearCalendario']);//Crear
+Route::get('consultarCalendario/{id}', [CalendarioController::class, 'consultarCalendario']);//Consultar
+Route::put('editarCalendario/{id}', [CalendarioController::class, 'editarCalendario']); // Editar
+Route::put('desactivarCalendario/{id}', [CalendarioController::class, 'desactivarCalendario']);
+
+

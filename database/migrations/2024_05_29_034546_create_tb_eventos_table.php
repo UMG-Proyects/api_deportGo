@@ -19,15 +19,15 @@ class CreateTbEventosTable extends Migration
             $table->integer('id_categoria')->nullable(false);
             $table->integer('id_deporte')->nullable(false);
             $table->integer('id_patrocinador')->nullable(true);
-            $table->integer('id_municipio')->nullable(false);
-            $table->string('nombre', 255)->nullable(false);
-            $table->string('descripcion', 255);
-            $table->date('fecha_inicio')->nullable(false);
+            $table->integer('id_municipio')->nullable(true);
+            $table->string('nombre', 255)->nullable(true);
+            $table->string('descripcion', 255)->nullable(true);
+            $table->date('fecha_inicio')->nullable(true);
             $table->date('fecha_final')->nullable(true);
-            $table->time('hora')->default('12:00:00');
-            $table->string('equipos_participantes', 255);
-            $table->string('ubicacion')->nullable(true); // Permitir valores nulos
-            $table->string('rama', 255)->nullable(false);
+            $table->time('hora')->default(true);
+            $table->string('equipos_participantes', 255)->nullable(true);
+            $table->string('ubicacion')->nullable(true); 
+            $table->string('rama', 255)->nullable(true);
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ class CreateTbEquipoTable extends Migration
             $table->id();
             $table->boolean('estado')->default(true);
             $table->integer('id_deporte')->nullable(false);
-            $table->integer('id_categoria')->nullable(false);
-            $table->integer('id_municipio')->nullable(false);
+            $table->integer('id_categoria')->nullable(true);
+            $table->integer('id_municipio')->nullable(true);
             $table->string('nombre');
             $table->integer('participantes');
             $table->timestamps();
