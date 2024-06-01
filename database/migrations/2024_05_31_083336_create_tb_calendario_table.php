@@ -16,15 +16,15 @@ class CreateTbCalendarioTable extends Migration
         Schema::create('tb_calendario', function (Blueprint $table) {
             $table->id();
             $table->boolean('estado')->default(true);
-            $table->integer('id_arbitro')->nullable(false);
+            $table->integer('id_arbitro')->nullable(true);
             $table->integer('id_equipo')->nullable(false);
             $table->integer('id_deportes')->nullable(true);
-            $table->date('fecha')->nullable(false);
-            $table->time('hora')->default('12:00:00');
-            $table->string('direccion',255)->nullable(false);
-            $table->integer('resultadoA')->nullable(false);
-            $table->integer('resultadoB')->nullable(false);
-            $table->string('Cancha',255)->nullable(false);
+            $table->date('fecha')->nullable(true);
+            $table->time('hora')->default(true);
+            $table->string('direccion',255)->nullable(true);
+            $table->integer('resultadoA')->nullable(true);
+            $table->integer('resultadoB')->nullable(true);
+            $table->string('Cancha',255)->nullable(true);
             $table->timestamps();
         });
     }

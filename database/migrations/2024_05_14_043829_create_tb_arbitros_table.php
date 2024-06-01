@@ -17,12 +17,12 @@ class CreateTbArbitrosTable extends Migration
             $table->id();
             $table->boolean('estado')->default(true);
             $table->string('primer_nombre',255)->nullable(false);
-            $table->string('segundo_nombre',255);
+            $table->string('segundo_nombre',255)->nullable(true);
             $table->string('primer_apellido',255)->nullable(false);
-            $table->string('segundo_apellido',255);
-            $table->string('genero',255);
-            $table->string('direccion',255)->nullable(false);
-            $table->integer('telefono')->nullable(false);
+            $table->string('segundo_apellido',255)->nullable(true);
+            $table->string('genero',255)->nullable(true);
+            $table->string('direccion',255)->nullable(true);
+            $table->integer('telefono')->nullable(true);
             $table->timestamps();
         });
     }
