@@ -34,8 +34,8 @@ class CalendarioController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'id_arbitro' => 'required|integer',
-                'id_equipo1' => 'required|integer',
-                'id_equipo2' => 'required|integer|different:id_equipo1',
+                'id_equipo1' => 'required|string',
+                'id_equipo2' => 'required|string',
                 'id_deportes' => 'required|integer',
                 'fecha' => 'required|date',
                 'hora' => 'required|date_format:H:i:s',
